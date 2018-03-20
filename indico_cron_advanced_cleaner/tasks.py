@@ -59,4 +59,6 @@ def anonymize_registrations(event):
         registration.first_name = _hash(registration.first_name)
         registration.last_name = _hash(registration.last_name)
         registration.email = _hash(registration.email)
+        if registration.user:
+            registration.user = None
     db.session.commit()
