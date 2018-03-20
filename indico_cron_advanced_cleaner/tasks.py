@@ -51,7 +51,7 @@ def anonymize_registrations(event):
     for registration in event.registrations.all():
         for rdata in registration.data:
             if isinstance(rdata.data, unicode):
-                rdata.data = sha512(rdata.data).hexdigest()[:12]
+                rdata.data = _hash(rdata.data)
         registration.first_name = _hash(registration.first_name)
         registration.last_name = _hash(registration.last_name)
         registration.email = _hash(registration.email)
