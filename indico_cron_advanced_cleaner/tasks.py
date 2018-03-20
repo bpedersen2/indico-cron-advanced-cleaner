@@ -21,7 +21,7 @@ from indico.modules.events.logs import EventLogEntry
 from indico.util.date_time import now_utc
 
 
-@celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cronjobs_mlz')
+@celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cron_advanced_cleaner')
 def run_anonymize():
     events = Event.query.filter(or_(Event.is_deleted, Event.end_dt < now_utc() - timedelta(days=365))).all()
     for event in events:
@@ -31,7 +31,7 @@ def run_anonymize():
             set_feature_enabled(event,'anonymize_registrations',False)
             cleanup_logs(event)
 
-@celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cronjobs_mlz')
+@celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cron_advanced_cleaner')
 def run_cleanup_log():
     events = Event.query.filter(Event.end_dt < now_utc() - timedelta(days=365) ).all()
     for event in events:
