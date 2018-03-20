@@ -53,9 +53,22 @@ def _hash(val):
 
 def anonymize_registrations(event):
     for registration in event.registrations.all():
-        for rdata in registration.data:
-            if isinstance(rdata.data, unicode):
+        for fid, rdata in registration.data_by_field.iteritems():
+            fieldtype = RegistrationFormField.find(id=fid).first().input_type
+            if fieldtype in ('text', 'textarea'):
                 rdata.data = _hash(rdata.data)
+            elif fieldtype == 'email':
+                rdata.data = _hash(rdata.data) + '@invalid.invalid'
+            elif fieldtype == 'phone':
+                rdata.data = '(+00) 0000000'
+            elif fieldtype == 'date':
+                # Keep dates for now
+                pass
+            elif fieldtype == 'country':
+                # Keep country for now
+                pass
+        # other field types are not touched (choice, mulitchoice, radio)
+
         registration.first_name = _hash(registration.first_name)
         registration.last_name = _hash(registration.last_name)
         registration.email = _hash(registration.email)
