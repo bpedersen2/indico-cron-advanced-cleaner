@@ -28,15 +28,17 @@ def run_anonymize():
         if event.has_feature('anonymize_registrations'):
             anonymize_registrations(event)
             # disable feature to avoid multiple runs
-            set_feature_enabled(event,'anonymize_registrations',False)
+            set_feature_enabled(event, 'anonymize_registrations', False)
             cleanup_logs(event)
+
 
 @celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cron_advanced_cleaner')
 def run_cleanup_log():
-    events = Event.query.filter(Event.end_dt < now_utc() - timedelta(days=365) ).all()
+    events = Event.query.filter(Event.end_dt < now_utc() - timedelta(days=365)).all()
     for event in events:
         if event.has_feature('cleanup_log'):
             cleanup_logs(event)
+
 
 def cleanup_logs(event):
     query = EventLogEntry.query.filter(EventLogEntry.logged_dt < now_utc() - timedelta(days=31),
@@ -44,8 +46,10 @@ def cleanup_logs(event):
     query.delete()
     db.session.commit()
 
+
 def _hash(val):
     return sha512(val.encode('utf-8')).hexdigest()[:12]
+
 
 def anonymize_registrations(event):
     for registration in event.registrations.all():
