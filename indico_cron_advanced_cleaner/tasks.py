@@ -33,6 +33,13 @@ def run_anonymize():
 
 
 @celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cron_advanced_cleaner')
+def run_anonymize_deleted_users():
+    users = User.query.filter(User.is_deleted).all()
+    for user in users:
+        anonymize_deleted_user(user)
+
+
+@celery.periodic_task(run_every=crontab(day_of_month='1', hour='5'), plugin='cron_advanced_cleaner')
 def run_cleanup_log():
     events = Event.query.filter(Event.end_dt < now_utc() - timedelta(days=365)).all()
     for event in events:
