@@ -28,7 +28,9 @@ class AdvancedCleanerCronjobsPlugin(IndicoPlugin):
        if the  event is older than 1 year or deleted.
        The task per default runs on the first of every month.
        Log entries will be deleted in this case as well.
-    2) run_cleanup_log: If the feature `cleanup_log` is set, then clean
+    2) run_anonymize_deleted_users: Anonymize deleted user records
+       The task per default runs on the first of every month.
+    3) run_cleanup_log: If the feature `cleanup_log` is set, then clean
        log  entries if the event is older than 1 year.
        The task per default runs  on the first of every month.
     """

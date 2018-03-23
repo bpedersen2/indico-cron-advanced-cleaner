@@ -48,8 +48,29 @@ def cleanup_logs(event):
 
 
 def _hash(val):
-    return sha512(val.encode('utf-8')).hexdigest()[:12]
+    return sha512(val.encode('utf-8')+now_utc().isoformat()).hexdigest()[:12]
 
+
+def anonymize_deleted_user(user):
+    _anon_attrs = ['first_name', 'last_name', 'phone', 'address',]
+    _clear_attrs_str = ['affiliation', 'email', 'secondary_emails', ]
+    _clear_attrs_set = ['favorite_users', 'favorite_categories',
+                    'suggested_categories', 'old_api_keys', 'identities']
+    _clear_attrs_list = ['old_api_keys',]
+    _clear_attrs_None = ['api_key',]
+
+
+    for attr in _clear_attrs_str:
+        setattr(user, attr, '')
+
+    for attr in _clear_attrs_set:
+        setattr(user, attr, set())
+
+    for attr in _clear_attrs_list:
+        setattr(user, attr, list())
+
+    for attr in _anon_attrs:
+        setattr(user, attr, _hash(getattr(user, attr) ))
 
 def anonymize_registrations(event):
     for registration in event.registrations.all():
