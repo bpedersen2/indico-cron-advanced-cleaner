@@ -18,6 +18,7 @@ from indico.core.db import db
 from indico.modules.events.models.events import Event
 from indico.modules.events.features.util import set_feature_enabled
 from indico.modules.events.logs import EventLogEntry
+from indico.modules.users.models.users import User
 from indico.util.date_time import now_utc
 
 
@@ -61,8 +62,7 @@ def _hash(val):
 def anonymize_deleted_user(user):
     _anon_attrs = ['first_name', 'last_name', 'phone', 'address',]
     _clear_attrs_str = ['affiliation', 'email', 'secondary_emails', ]
-    _clear_attrs_set = ['favorite_users', 'favorite_categories',
-                    'suggested_categories', 'old_api_keys', 'identities']
+    _clear_attrs_set = ['favorite_users', 'favorite_categories', 'identities']
     _clear_attrs_list = ['old_api_keys',]
     _clear_attrs_None = ['api_key',]
 

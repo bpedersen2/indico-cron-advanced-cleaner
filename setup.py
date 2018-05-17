@@ -21,7 +21,7 @@ setup(
     zip_safe=False,
     include_package_data=True,
     install_requires=[
-        'indico==2.0'
+        'indico>=2.1'
     ],
     entry_points={
         'indico.plugins': {'cron_advanced_cleaner=indico_cron_advanced_cleaner.plugin:AdvancedCleanerCronjobsPlugin'}
