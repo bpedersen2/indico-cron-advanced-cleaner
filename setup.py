@@ -12,7 +12,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='indico-cron-advanced-cleaner',
-    version='1.0',
+    version='2.2',
     url='https://github.com/bpedersen2/indico-cron-advanced-cleaner',
     license='MIT',
     author='MLZ Indico Team',
