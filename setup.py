@@ -12,7 +12,6 @@ from setuptools import find_packages, setup
 
 setup(
     name='indico-cron-advanced-cleaner',
-    version='2.2',
     url='https://github.com/bpedersen2/indico-cron-advanced-cleaner',
     license='MIT',
     author='MLZ Indico Team',
@@ -20,9 +19,10 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
-    install_requires=[
-        'indico>=2.1'
-    ],
+    install_requires=['indico>=2.3.0'],
+    use_scm_version={"write_to":"indico_cron_advanced_cleaner/version.py",
+                     "local_scheme":"node-and-timestamp"},
+    setup_requires = ["setuptools>=39", "setuptools_scm[toml]>=3.4"],
     entry_points={
         'indico.plugins': {'cron_advanced_cleaner=indico_cron_advanced_cleaner.plugin:AdvancedCleanerCronjobsPlugin'}
     },

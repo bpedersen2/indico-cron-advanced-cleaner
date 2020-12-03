@@ -101,3 +101,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+indico_cron_advanced_cleaner/version.py
