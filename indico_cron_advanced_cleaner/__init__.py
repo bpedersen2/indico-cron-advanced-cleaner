@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 from indico.core import signals
 
 
-@signals.import_tasks.connect
+@signals.core.import_tasks.connect
 def _import_tasks(sender, **kwargs):
     import indico_cron_advanced_cleaner.tasks
 
