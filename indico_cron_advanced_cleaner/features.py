@@ -5,6 +5,7 @@
 # them and/or modify them under the terms of the MIT License; see
 # the LICENSE file for more details.
 
+from indico.util.i18n import _
 from indico.modules.events.features.base import EventFeature
 
 
