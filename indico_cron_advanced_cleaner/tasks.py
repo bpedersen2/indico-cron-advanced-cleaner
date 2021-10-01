@@ -57,7 +57,7 @@ def cleanup_logs(event):
 
 
 def _hash(val):
-    return sha512(val.encode('utf-8')+now_utc().isoformat()).hexdigest()[:12]
+    return sha512(val.encode('utf-8')+now_utc().isoformat().encode('utf-8')).hexdigest()[:12]
 
 
 def anonymize_deleted_user(user):
