@@ -83,7 +83,7 @@ def anonymize_deleted_user(user):
 def anonymize_registrations(event):
     for registration in event.registrations.all():
         for fid, rdata in registration.data_by_field.items():
-            fieldtype = RegistrationFormField.find(id=fid).first().input_type
+            fieldtype = RegistrationFormField.get(oid=fid).input_type
             if fieldtype in ('text', 'textarea'):
                 rdata.data = _hash(rdata.data)
             elif fieldtype == 'email':
