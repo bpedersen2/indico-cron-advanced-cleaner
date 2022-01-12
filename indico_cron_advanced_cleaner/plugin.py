@@ -15,7 +15,7 @@ from indico.modules.categories.models.categories import Category
 from indico.modules.rb.models.rooms import Room
 from indico.util.string import natural_sort_key
 from indico.web.forms.base import IndicoForm
-from wtforms.fields.simple import BooleanField
+from wtforms.fields import BooleanField
 
 
 class AdvancedCleanerCronjobsPlugin(IndicoPlugin):

@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
-    install_requires=['indico>=2.3.0'],
+    install_requires=['indico>=3.1'],
     use_scm_version={"write_to":"indico_cron_advanced_cleaner/version.py",
                      "local_scheme":"node-and-timestamp"},
     setup_requires = ["setuptools>=39", "setuptools_scm[toml]>=3.4"],
