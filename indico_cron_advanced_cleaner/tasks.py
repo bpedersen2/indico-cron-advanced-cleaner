@@ -18,7 +18,7 @@ from indico.core.db import db
 from indico.modules.events.models.events import Event
 from indico.modules.events.features.util import set_feature_enabled
 from indico.modules.events.registration.models.form_fields import RegistrationFormField
-from indico.modules.events.logs import EventLogEntry
+from indico.modules.logs.models.entries import EventLogEntry
 from indico.modules.users.models.users import User
 from indico.util.date_time import now_utc
 
